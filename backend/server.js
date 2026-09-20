@@ -2,14 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql2/promise';
 
-// ============================================
-// 🔧 MySQL Connection (hardcoded credentials)
-// ============================================
+const PORT = Number(process.env.PORT) || 3000;
 const db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'crud2',
+  host: process.env.DB_HOST || 'localhost',
+  port: Number(process.env.DB_PORT) || 3306,
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'crud2',
 });
 
 (async () => {
@@ -23,7 +22,6 @@ const db = mysql.createPool({
 })();
 
 const app = express();
-const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -161,6 +159,6 @@ app.delete(['/api/users/:id', '/users/:id'], async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
 });
