@@ -1,4 +1,3 @@
-cat > frontend/Dockerfile << 'EOF'
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -22,4 +21,3 @@ RUN printf 'server {\n  listen 5173;\n  root /usr/share/nginx/html;\n  index ind
 EXPOSE 5173
 
 CMD ["nginx", "-g", "daemon off;"]
-EOF
