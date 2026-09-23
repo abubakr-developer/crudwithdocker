@@ -25,7 +25,7 @@ jobs:
         with:
           context: ./backend
           push: ${{ github.ref == 'refs/heads/main' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp-backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/myapp-backend:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -34,7 +34,7 @@ jobs:
         with:
           context: ./frontend
           push: ${{ github.ref == 'refs/heads/main' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp-frontend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/myapp-frontend:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
