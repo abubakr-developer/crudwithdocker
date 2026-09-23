@@ -78,4 +78,3 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/myapp-frontend:latest
             docker compose -f docker-compose.prod.yml --env-file .env up -d --remove-orphans
             docker image prune -f
-EOF
