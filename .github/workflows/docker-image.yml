@@ -57,15 +57,16 @@ jobs:
           source: "docker-compose.prod.yml,mysql/init.sql"
           target: "/home/${{ secrets.EC2_USER }}/app"
 
-      - name: SSH & deploy
+      - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            set -e
             cd ~/app
-            cat > .env <<ENVEOF
+            cat > .env <<'ENVEOF'
             DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
             MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
             MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
@@ -74,7 +75,7 @@ jobs:
             VITE_API_URL=${{ secrets.VITE_API_URL }}
             ENVEOF
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/myapp-backend:latest
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/myapp-frontend:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
             docker compose -f docker-compose.prod.yml --env-file .env up -d --remove-orphans
             docker image prune -f
