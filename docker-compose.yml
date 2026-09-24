@@ -24,7 +24,7 @@ services:
       start_period: 30s
 
   backend:
-    image: YOUR_DOCKERHUB_USERNAME/docker-backend:latest
+    image: ${DOCKER_USERNAME:-abubakrdeveloper}/docker-backend:latest
     container_name: docker-backend
     restart: unless-stopped
     depends_on:
@@ -41,7 +41,7 @@ services:
       - '3000:3000'
 
   frontend:
-    image: YOUR_DOCKERHUB_USERNAME/docker-frontend:latest
+    image: ${DOCKER_USERNAME:-abubakrdeveloper}/docker-frontend:latest
     container_name: docker-frontend
     restart: unless-stopped
     depends_on:
