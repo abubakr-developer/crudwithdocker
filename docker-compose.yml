@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: mysql:8.0
@@ -22,8 +24,7 @@ services:
       start_period: 30s
 
   backend:
-    build:
-      context: ./backend
+    image: YOUR_DOCKERHUB_USERNAME/docker-backend:latest
     container_name: docker-backend
     restart: unless-stopped
     depends_on:
@@ -38,24 +39,15 @@ services:
       DB_NAME: crud2
     ports:
       - '3000:3000'
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
 
   frontend:
-    build:
-      context: ./frontend
+    image: YOUR_DOCKERHUB_USERNAME/docker-frontend:latest
     container_name: docker-frontend
     restart: unless-stopped
     depends_on:
       - backend
-    environment:
-      VITE_API_URL: http://localhost:3000/api
     ports:
-      - '5173:5173'
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - '5173:80'
 
 volumes:
   mysql_data:

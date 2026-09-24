@@ -46,7 +46,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
-            cd /path/to/your/project
+            cd ~/crudwithdocker
             git pull origin main
             docker compose pull
             docker compose up -d --remove-orphans
