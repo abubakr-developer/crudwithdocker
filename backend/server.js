@@ -11,16 +11,6 @@ const db = mysql.createPool({
   database: process.env.DB_NAME || 'crud2',
 });
 
-(async () => {
-  try {
-    const conn = await db.getConnection();
-    console.log('✅ MySQL connected successfully');
-    conn.release();
-  } catch (err) {
-    console.error('❌ MySQL connection failed:', err.message);
-  }
-})();
-
 const app = express();
 
 app.use(cors());
@@ -159,6 +149,20 @@ app.delete(['/api/users/:id', '/users/:id'], async (req, res) => {
   }
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  (async () => {
+    try {
+      const conn = await db.getConnection();
+      console.log('✅ MySQL connected successfully');
+      conn.release();
+    } catch (err) {
+      console.error('❌ MySQL connection failed:', err.message);
+    }
+  })();
+
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
+  });
+}
+
+export default app;
