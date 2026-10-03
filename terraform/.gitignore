@@ -1,0 +1,5 @@
+.terraform/          # Downloaded provider plugins
+*.tfstate            # Terraform state can contain sensitive values
+*.tfstate.backup
+terraform.tfvars     # Real deployment values
+*.pem                # Private SSH keys — never commit these
