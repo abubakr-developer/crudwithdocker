@@ -25,6 +25,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./backend
+          no-cache: true
+          pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
           tags: ${{ secrets.DOCKER_USERNAME }}/docker-backend:latest
           cache-from: type=gha

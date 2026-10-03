@@ -103,6 +103,8 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./backend
+          no-cache: true
+          pull: true
           file: ./backend/Dockerfile
           push: false
           load: true
@@ -166,6 +168,8 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./backend
+          no-cache: true
+          pull: true
           file: ./backend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/docker-backend:latest
