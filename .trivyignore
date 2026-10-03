@@ -1,0 +1,3 @@
+# The EC2 bootstrap requires HTTPS to download OS packages, clone the configured Git repository, and pull container images.
+# Egress is limited to TCP 443; AWS-0104 does not account for port restrictions.
+AVD-AWS-0104
