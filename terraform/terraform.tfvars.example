@@ -1,4 +1,4 @@
-aws_region    = "us-east-1"
+aws_region    = "eu-north-1"
 instance_type = "t3.micro"
 key_name      = "final-docker"                         # Key pair name (no .pem)
 my_ip         = "51.21.254.142/32"                          # Your public IPv4 address

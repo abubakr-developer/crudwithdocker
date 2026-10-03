@@ -146,6 +146,14 @@ jobs:
           exit-code: '0'   # informational for now; flip to '1' once clean
 
   # ---------------------------------------------------------------
+      - name: Trivy scan - Terraform configuration
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          scan-ref: ./terraform
+          format: table
+          severity: CRITICAL,HIGH
+          exit-code: '1'
   # 5. BUILD + PUSH + DEPLOY — only runs if all scans/tests passed
   # ---------------------------------------------------------------
   deploy:
