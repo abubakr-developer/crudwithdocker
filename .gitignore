@@ -8,3 +8,9 @@ build/
 .env.*
 .DS_Store
 npm-debug.log*
+terraform/*.pem
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/terraform.tfvars
+terraform/.terraform/
+terraform/.terraform.lock.hcl
