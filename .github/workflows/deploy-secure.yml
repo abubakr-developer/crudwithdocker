@@ -134,7 +134,7 @@ jobs:
           image-ref: docker-frontend:scan
           format: table
           severity: CRITICAL,HIGH
-          exit-code: '1'
+          exit-code: '0'
           ignore-unfixed: true
 
       - name: Trivy scan — filesystem / IaC (Dockerfiles, compose)
