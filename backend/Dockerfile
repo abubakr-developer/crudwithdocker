@@ -1,5 +1,8 @@
 FROM node:20-alpine
 
+# Patch OS-level packages (fixes known OpenSSL CVEs in the base image)
+RUN apk update && apk upgrade --no-cache
+
 # Set working directory inside the container
 WORKDIR /app
 
